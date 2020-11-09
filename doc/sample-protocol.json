@@ -1,0 +1,74 @@
+[
+  {
+    "round": 1,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 3,
+      "healthPointsLost": 5,
+      "healthPointsLeft": 5
+    }
+  },
+  {
+    "round": 2,
+    "shootout": {
+      "activeCowboy": 3,
+      "targetCowboy": 2,
+      "healthPointsLost": 2,
+      "healthPointsLeft": 8
+    }
+  },
+  {
+    "round": 3,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 3,
+      "healthPointsLost": 2,
+      "healthPointsLeft": 3
+    }
+  },
+  {
+    "round": 4,
+    "shootout": {
+      "activeCowboy": 3,
+      "targetCowboy": 2,
+      "healthPointsLost": 3,
+      "healthPointsLeft": 7
+    }
+  },
+  {
+    "round": 5,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 1,
+      "healthPointsLost": 3,
+      "healthPointsLeft": 0
+    }
+  },
+  {
+    "round": 6,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 5,
+      "healthPointsLost": 5,
+      "healthPointsLeft": 0
+    }
+  },
+  {
+    "round": 7,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 4,
+      "healthPointsLost": 3,
+      "healthPointsLeft": 0
+    }
+  },
+  {
+    "round": 8,
+    "shootout": {
+      "activeCowboy": 2,
+      "targetCowboy": 3,
+      "healthPointsLost": 3,
+      "healthPointsLeft": 0
+    }
+  }
+]
