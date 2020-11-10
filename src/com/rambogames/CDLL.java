@@ -1,9 +1,11 @@
 package com.rambogames;
 
-public class CDLL {
+import java.io.Serializable;
+
+public class CDLL<E>  implements Serializable{
     private Node head;
     @SuppressWarnings("unused")
-	private int data;
+	private E data;
 
     //get a New Node
     public Node getNewNode(){
@@ -37,7 +39,7 @@ public class CDLL {
         return currentNode.getRight();
     }
 
-    public void addNodeAtBeginning(Cowboy data){
+    public void addNodeAtBeginning(E data){
         Node newNode = new Node(data);
         if(head == null){
             newNode.setRight(newNode);
@@ -54,7 +56,7 @@ public class CDLL {
         }
     }
 
-    public void addNodeAtEnd(Cowboy data){
+    public void addNodeAtEnd(E data){
         Node newNode = new Node(data);
 
         if (head == null){

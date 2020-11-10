@@ -33,8 +33,12 @@ public class Main {
         try(Scanner inp = new Scanner(System.in)){
             numberOfCowboys = inp.nextInt();
         }
-
-        CDLL cowboys =  getCowboys(numberOfCowboys);
+        
+        if(numberOfCowboys <=1 || numberOfCowboys >=30){
+        	System.out.println("Please enter the number of Cowboys between 2 and 30. \n");
+        	return;
+        }
+        CDLL<Cowboy> cowboys =  getCowboys(numberOfCowboys);
 
         //Step 2: Display Cowboys Circular Linked List/ Shootout Formation
         displayShootoutFormation(numberOfCowboys, cowboys);
@@ -62,10 +66,10 @@ public class Main {
             shootoutHistory.shootout = new Shootout();
 
             //Step 5: Check the current health points of the Active shooter if it is even shoot right else shoot left
-            if(cowboys.getHeadNode().getData().getCowboyCurrentHealth() % 2 == 0){
-                int activeCowboyNumber = cowboys.getHeadNode().getData().getCowboyNumber();
-                int targetCowboyNumber = cowboys.getHeadNode().getRight().getData().getCowboyNumber();
-                int targetCowboyHealthPointsBeforeGettingShot = cowboys.getHeadNode().getRight().getData().getCowboyCurrentHealth();
+            if(((Cowboy) cowboys.getHeadNode().getData()).getCowboyCurrentHealth() % 2 == 0){
+                int activeCowboyNumber = ((Cowboy) cowboys.getHeadNode().getData()).getCowboyNumber();
+                int targetCowboyNumber = ((Cowboy) cowboys.getHeadNode().getRight().getData()).getCowboyNumber();
+                int targetCowboyHealthPointsBeforeGettingShot = ((Cowboy) cowboys.getHeadNode().getRight().getData()).getCowboyCurrentHealth();
                 boolean isDead = false;
                 int healthPointsLost = shoot();
                 int healthPointsAfterGettingShot = targetCowboyHealthPointsBeforeGettingShot - healthPointsLost;
@@ -74,7 +78,7 @@ public class Main {
                     healthPointsAfterGettingShot = 0;
                     isDead = true;
                 }
-                cowboys.getHeadNode().getRight().getData().setCowboyCurrentHealth(healthPointsAfterGettingShot);
+                ((Cowboy) cowboys.getHeadNode().getRight().getData()).setCowboyCurrentHealth(healthPointsAfterGettingShot);
                 System.out.println("Cowboy "+ activeCowboyNumber + " shot Cowboy "+ targetCowboyNumber +". Cowboy "+targetCowboyNumber + " had "+ targetCowboyHealthPointsBeforeGettingShot + " health points and after getting shot, his remaining health points are "+healthPointsAfterGettingShot );
 
                 shootoutHistory.setActiveCowboy(activeCowboyNumber);
@@ -90,9 +94,9 @@ public class Main {
                 }
             }
             else{
-                int activeCowboyNumber = cowboys.getHeadNode().getData().getCowboyNumber();
-                int targetCowboyNumber = cowboys.getHeadNode().getLeft().getData().getCowboyNumber();
-                int targetCowboyHealthPointsBeforeGettingShot = cowboys.getHeadNode().getRight().getData().getCowboyCurrentHealth();
+                int activeCowboyNumber = ((Cowboy) cowboys.getHeadNode().getData()).getCowboyNumber();
+                int targetCowboyNumber = ((Cowboy) cowboys.getHeadNode().getLeft().getData()).getCowboyNumber();
+                int targetCowboyHealthPointsBeforeGettingShot = ((Cowboy) cowboys.getHeadNode().getRight().getData()).getCowboyCurrentHealth();
                 boolean isDead = false;
 
                 int healthPointsLost = shoot();
@@ -103,7 +107,7 @@ public class Main {
                     isDead = true;
                 }
 
-                cowboys.getHeadNode().getLeft().getData().setCowboyCurrentHealth(healthPointsAfterGettingShot);
+                ((Cowboy) cowboys.getHeadNode().getLeft().getData()).setCowboyCurrentHealth(healthPointsAfterGettingShot);
                 System.out.println("Cowboy "+ activeCowboyNumber + " shot Cowboy "+ targetCowboyNumber +". Cowboy "+targetCowboyNumber + " had "+ targetCowboyHealthPointsBeforeGettingShot + " health points and after getting shot, his remaining health points are "+healthPointsAfterGettingShot );
 
                 shootoutHistory.setActiveCowboy(activeCowboyNumber);
@@ -124,15 +128,15 @@ public class Main {
             counter++;
         }while(cowboys.getSizeOfCDLL() > 1);
         
-        System.out.println("\n Cowboy "+ cowboys.getHeadNode().getData().getCowboyNumber() + " survived and emerged victorious in the shootout. \n");
+        System.out.println("\n Cowboy "+ ((Cowboy) cowboys.getHeadNode().getData()).getCowboyNumber() + " survived and emerged victorious in the shootout. \n");
         saveProtocolFile(protocolFile,shootoutHistories);
         calculateMd5Checksum(protocolFile);
 
     }
 
     //Creates and Returns cowboys
-    public static CDLL getCowboys(int numberOfCowboys) {
-        CDLL cowboys = new CDLL();
+    public static CDLL<Cowboy> getCowboys(int numberOfCowboys) {
+        CDLL<Cowboy> cowboys = new CDLL<Cowboy>();
 
         switch (numberOfCowboys) {
             case 0:
@@ -149,7 +153,7 @@ public class Main {
     }
 
     //Displays the shootout formation
-    public static void displayShootoutFormation(int cdllSize, CDLL cdll) {
+    public static void displayShootoutFormation(int cdllSize, CDLL<Cowboy> cdll) {
 
         System.out.print("\n Shootout formation = ");
         //create a pointer to point at head
@@ -164,22 +168,22 @@ public class Main {
 
         //If Single element in the List then show the link to itself.
         if (head.getRight() == head) {
-            System.out.print("Cowboy Number: " + head.getData().getCowboyNumber() + " <--> " + pointR.getData().getCowboyNumber()+ "\n");
+            System.out.print("Cowboy Number: " + ((Cowboy) head.getData()).getCowboyNumber() + " <--> " + ((Cowboy) pointR.getData()).getCowboyNumber()+ "\n");
             return;
         }
 
-        System.out.print("Cowboy Number: " + head.getData().getCowboyNumber() + " <--> ");
+        System.out.print("Cowboy Number: " + ((Cowboy) head.getData()).getCowboyNumber() + " <--> ");
         // Move the cursor to the right and then loop through and list all the other elements
         pointR = head.getRight();
 
         while (pointR.getRight() != head){
-            System.out.print("Cowboy Number: " + pointR.getData().getCowboyNumber()+ " <--> ");
+            System.out.print("Cowboy Number: " + ((Cowboy) pointR.getData()).getCowboyNumber()+ " <--> ");
             pointR = pointR.getRight();
         }
 
-        System.out.print("Cowboy Number: " + pointR.getData().getCowboyNumber()+ " <--> ");
+        System.out.print("Cowboy Number: " + ((Cowboy) pointR.getData()).getCowboyNumber()+ " <--> ");
         pointR = pointR.getRight();
-        System.out.print("Cowboy Number: " + pointR.getData().getCowboyNumber()+ "\n \n");
+        System.out.print("Cowboy Number: " + ((Cowboy) pointR.getData()).getCowboyNumber()+ "\n \n");
     }
 
     public static int shoot(){

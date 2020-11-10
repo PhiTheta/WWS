@@ -1,7 +1,9 @@
 package com.rambogames;
 
-public class Node {
-    private Cowboy data;
+import java.io.Serializable;
+
+public class Node<E> implements Serializable{
+    private E data;
     private Node left;
     private Node right;
 
@@ -10,10 +12,10 @@ public class Node {
         this.left = null;
         this.right = null;
     }
-    public Node(Cowboy data){
+    public Node(E data){
         this.data = data;
     }
-    public Node(Cowboy data, Node left, Node right){
+    public Node(E data, Node left, Node right){
         this.data = data;
         this.right = right; //Next Node
         this.left = left; //Previous Node
@@ -35,11 +37,11 @@ public class Node {
         return left;
     }
 
-    public void setData(Cowboy data){
+    public void setData(E data){
         this.data = data;
     }
 
-    public Cowboy getData(){
+    public E getData(){
         return data;
     }
 }
